@@ -1,0 +1,483 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── LYRNIQUE 2.0 DESIGN TOKENS ── */
+:root {
+  --bg:    #080a0f;
+  --bg2:   #0d1018;
+  --bg3:   #111520;
+  --b:     rgba(255,255,255,0.06);
+  --b2:    rgba(255,255,255,0.10);
+  --text:  #f0f2ff;
+  --text2: #c8cfe8;
+  --text3: #7e879e;
+  --g:  linear-gradient(135deg, #6366f1 0%, #a855f7 55%, #06b6d4 100%);
+  --g2: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --g3: linear-gradient(90deg,  #6366f1 0%, #a855f7 55%, #06b6d4 100%);
+
+  /* Shadcn HSL compatibility */
+  --background: 222 32% 5%;
+  --foreground: 230 100% 97%;
+  --card: 222 28% 8%;
+  --card-foreground: 230 100% 97%;
+  --popover: 222 28% 8%;
+  --popover-foreground: 230 100% 97%;
+  --primary: 218 91% 64%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 222 28% 12%;
+  --secondary-foreground: 230 100% 97%;
+  --muted: 222 28% 10%;
+  --muted-foreground: 225 20% 70%;
+  --accent: 222 28% 14%;
+  --accent-foreground: 230 100% 97%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 222 28% 10%;
+  --input: 222 28% 10%;
+  --ring: 218 91% 64%;
+  --radius: 0.5rem;
+}
+
+/* Academy wing overrides — all EdTech electric-blue tokens */
+[data-wing="academy"] {
+  --background: 220 30% 5%;
+  --foreground: 210 100% 98%;
+  --card: 220 28% 8%;
+  --card-foreground: 210 100% 98%;
+  --popover: 220 28% 8%;
+  --popover-foreground: 210 100% 98%;
+  --primary: 207 100% 50%;
+  --primary-foreground: 210 100% 98%;
+  --secondary: 187 100% 50%;
+  --secondary-foreground: 220 30% 5%;
+  --muted: 220 28% 12%;
+  --muted-foreground: 215 25% 78%;
+  --accent: 250 75% 60%;
+  --accent-foreground: 210 100% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 100% 98%;
+  --border: 220 28% 15%;
+  --input: 220 28% 12%;
+  --ring: 207 100% 50%;
+  --radius: 0.75rem;
+  background: hsl(220 30% 5%);
+  color: hsl(210 100% 98%);
+}
+
+/* ── BASE RESET ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Global focus ring for all form inputs */
+input:focus, select:focus, textarea:focus {
+  border-color: rgba(99, 102, 241, 0.45) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.10) !important;
+  outline: none;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.45;
+}
+
+/* Academy wing: hide grain so it doesn't double */
+[data-wing="academy"] ~ body::after { display: none; }
+
+/* ── GRADIENT TEXT ── */
+.gt  { background: var(--g);  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.gt2 { background: var(--g2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.gt3 { background: var(--g3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Floating orb animations */
+@keyframes float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -40px) scale(1.06); }
+  66%       { transform: translate(-20px, 25px) scale(0.96); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-35px, 30px) scale(1.04); }
+  70%       { transform: translate(20px, -20px) scale(0.98); }
+}
+@keyframes float-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(25px, -35px) scale(1.05); }
+}
+
+/* Animated shimmer gradient text — hero h1 only */
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.gt-anim {
+  background: linear-gradient(135deg, #6366f1, #a855f7, #06b6d4, #a855f7, #6366f1);
+  background-size: 300% 300%;
+  animation: shimmer 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 32px rgba(99,102,241,0.45));
+}
+
+/* Hero dot grid */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(99,102,241,0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle grid for non-hero sections */
+.section-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(99,102,241,0.10) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* Glow on stat numbers */
+.stat-glow {
+  filter: drop-shadow(0 0 14px rgba(99,102,241,0.5));
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(17,21,32,0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(99,102,241,0.12);
+  transition: border-color 0.3s, background 0.3s;
+}
+.glass-card:hover {
+  background: rgba(24,28,42,0.75);
+  border-color: rgba(99,102,241,0.28);
+}
+
+/* ── GRADIENT BORDER (::before mask technique) ── */
+.grad-border { position: relative; }
+.grad-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--g);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.grad-border:hover::before { opacity: 0.7; }
+
+/* ── ANIMATED GRADIENT BORDER (eyebrow badge) ── */
+@keyframes border-rotate {
+  0%   { background-position: 0% 50%, 0% 50%; }
+  50%  { background-position: 100% 50%, 100% 50%; }
+  100% { background-position: 0% 50%, 0% 50%; }
+}
+.grad-border-anim {
+  background:
+    linear-gradient(var(--bg2), var(--bg2)) padding-box,
+    linear-gradient(270deg, #6366f1, #a855f7, #ec4899, #6366f1) border-box;
+  background-size: 300% 300%;
+  border: 1px solid transparent;
+  animation: border-rotate 4s ease infinite;
+}
+
+/* ── ANIMATED BAR (contact form top line) ── */
+@keyframes bar-flow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.bar-flow {
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899, #6366f1);
+  background-size: 300% 100%;
+  animation: bar-flow 3s linear infinite;
+}
+
+/* ── SCROLL REVEAL ── */
+.rev {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.rev.on { opacity: 1; transform: none; }
+.rd1 { transition-delay: 0.1s; }
+.rd2 { transition-delay: 0.2s; }
+.rd3 { transition-delay: 0.3s; }
+
+/* ── TERMINAL LINE ANIMATIONS ── */
+.tl { display: flex; gap: 8px; margin-bottom: 1px; opacity: 0; animation: fi 0.25s forwards; }
+@keyframes fi { to { opacity: 1; } }
+.tp  { color: var(--text3); }
+.tc  { color: var(--text); }
+.tco { color: var(--text3); }
+.to  { color: var(--text2); padding-left: 18px; }
+.ts  { background: var(--g3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.tw  { color: #fbbf24; }
+.tcur { display: inline-block; width: 7px; height: 13px; background: var(--text2); animation: cur 1s infinite; vertical-align: middle; margin-left: 2px; }
+@keyframes cur { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ── PULSING DOT (eyebrow) ── */
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ── BUTTONS ── */
+.btn-ghost {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text2);
+  background: transparent;
+  border: 1px solid var(--b2);
+  border-radius: 6px;
+  padding: 7px 16px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+.btn-grad {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--g2);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-grad:hover { opacity: 0.88; transform: translateY(-1px); }
+
+@keyframes btn-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
+  50%       { box-shadow: 0 0 16px 4px rgba(99,102,241,0.22); }
+}
+.btn-hero {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--g2);
+  border: none;
+  border-radius: 8px;
+  padding: 13px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.25s, transform 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  animation: btn-pulse 3s ease-in-out infinite;
+}
+.btn-hero:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 0 28px 6px rgba(99,102,241,0.35), 0 12px 40px rgba(99,102,241,0.2); animation: none; }
+
+.btn-hero-o {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--text2);
+  background: transparent;
+  border: 1px solid var(--b2);
+  border-radius: 8px;
+  padding: 13px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-hero-o:hover { color: var(--text); border-color: rgba(255,255,255,0.18); }
+
+/* ── Academy wow-factor classes ── */
+[data-wing="academy"] .acad-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,136,255,0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes acad-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+.acad-shimmer-text {
+  background: linear-gradient(135deg, #0088ff, #00ccff, #60b4ff, #00ccff, #0088ff);
+  background-size: 300% 300%;
+  animation: acad-shimmer 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 28px rgba(0,136,255,0.45));
+}
+
+.acad-stat-glow {
+  filter: drop-shadow(0 0 12px rgba(0,136,255,0.5));
+}
+
+.acad-glass {
+  background: rgba(0, 8, 24, 0.55) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0,136,255,0.14) !important;
+  transition: border-color 0.3s, box-shadow 0.3s !important;
+}
+.acad-glass:hover {
+  border-color: rgba(0,136,255,0.32) !important;
+  box-shadow: 0 8px 32px rgba(0,136,255,0.12) !important;
+}
+
+/* ── Academy gradient text (EdTech blue/cyan/purple) ── */
+[data-wing="academy"] .gradient-text {
+  background: linear-gradient(135deg, hsl(250, 75%, 60%), hsl(207, 100%, 50%), hsl(187, 100%, 50%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ───────────────────────────────────────────
+   LIGHT MODE — applied when <html class="light">
+   (next-themes sets attribute="class")
+   ─────────────────────────────────────────── */
+html.light {
+  /* Legacy custom vars */
+  --bg:    #ffffff;
+  --bg2:   #f4f6fb;
+  --bg3:   #eaecf4;
+  --b:     rgba(0,0,0,0.07);
+  --b2:    rgba(0,0,0,0.12);
+  --text:  #0d1117;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+
+  /* Shadcn HSL vars (main site) */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 8%;
+  --card: 220 14% 96%;
+  --card-foreground: 222 47% 8%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 8%;
+  --primary: 218 91% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 14% 92%;
+  --secondary-foreground: 222 47% 8%;
+  --muted: 220 14% 94%;
+  --muted-foreground: 215 16% 42%;
+  --accent: 220 14% 90%;
+  --accent-foreground: 222 47% 8%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 13% 88%;
+  --input: 220 13% 88%;
+  --ring: 218 91% 50%;
+}
+
+html.light body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Light: academy wing overrides */
+html.light [data-wing="academy"] {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 10%;
+  --card: 210 33% 95%;
+  --card-foreground: 222 47% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 10%;
+  --primary: 207 100% 42%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 187 70% 40%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 210 33% 92%;
+  --muted-foreground: 215 20% 42%;
+  --accent: 250 50% 58%;
+  --accent-foreground: 0 0% 100%;
+  --border: 210 20% 85%;
+  --input: 210 20% 88%;
+  --ring: 207 100% 42%;
+  background: hsl(210 40% 98%);
+  color: hsl(222 47% 10%);
+}
+
+/* ── Nav backgrounds (themed) ── */
+.main-nav {
+  background: rgba(8, 10, 15, 0.88);
+}
+html.light .main-nav {
+  background: rgba(255, 255, 255, 0.90);
+}
+
+.main-nav-mobile {
+  background: rgba(8, 10, 15, 0.95);
+}
+html.light .main-nav-mobile {
+  background: rgba(248, 250, 255, 0.97);
+}
+
+/* AcademyNav background */
+.acad-nav {
+  background: rgba(0, 6, 20, 0.82);
+}
+html.light .acad-nav {
+  background: rgba(248, 250, 255, 0.92) !important;
+  border-color: rgba(0, 100, 200, 0.15) !important;
+}
+
+/* ── Glass cards ── */
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.80);
+  border-color: rgba(99, 102, 241, 0.15);
+}
+html.light .glass-card:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(99, 102, 241, 0.30);
+}
+
+html.light .acad-glass {
+  background: rgba(235, 245, 255, 0.85) !important;
+  border-color: rgba(0, 100, 200, 0.18) !important;
+}
+html.light .acad-glass:hover {
+  border-color: rgba(0, 100, 200, 0.35) !important;
+  box-shadow: 0 8px 32px rgba(0, 100, 200, 0.10) !important;
+}
+
+/* ── Light: Programs dropdown ── */
+html.light [data-wing="academy"] .academy-nav-dropdown {
+  background: rgba(250, 252, 255, 0.97) !important;
+  border-color: rgba(0, 100, 200, 0.18) !important;
+  box-shadow: 0 16px 40px rgba(0,50,150,0.12) !important;
+}
+
+/* ── Light: reduce grain visibility ── */
+html.light body::after { opacity: 0.15; }
