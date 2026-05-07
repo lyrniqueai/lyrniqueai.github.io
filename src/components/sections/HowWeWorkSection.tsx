@@ -176,10 +176,10 @@ export default function HowWeWorkSection() {
           {/* Two-column body */}
           <div
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", background: "var(--bg)" }}
-            className="max-nav:grid-cols-1"
+            className="max-nav:!grid-cols-1"
           >
             {/* Left — deliverables */}
-            <div style={{ padding: "24px 28px", borderRight: "1px solid var(--b)" }}>
+            <div style={{ padding: "24px 28px", borderRight: "1px solid var(--b)" }} className="max-nav:border-r-0 max-nav:border-b max-nav:border-[var(--b)]">
               <div style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--text3)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>
                 What you receive
               </div>

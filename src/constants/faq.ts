@@ -7,7 +7,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     q: "Who will actually work on my project?",
-    a: "The same 2–3 engineers from your discovery call. No team rotations. No subcontractors. No headcount added without your knowledge. Bait-and-switch staffing is the most common offshore failure mode — we've eliminated it by design.",
+    a: "The engineers from your discovery call — right-sized for your project's scope. No team rotations. No subcontractors. No headcount added without your knowledge. Bait-and-switch staffing is the most common offshore failure mode — we've eliminated it by design.",
   },
   {
     q: "You're based in India. What about timezone and collaboration?",

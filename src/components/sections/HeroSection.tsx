@@ -1,3 +1,4 @@
+import { Lock } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import GradientOrbs from "@/components/layout/GradientOrbs";
 import { HERO_STATS } from "@/constants";
@@ -97,14 +98,22 @@ export default function HeroSection() {
             See what we've built
           </a>
         </div>
-        <p style={{ fontSize: 12, color: "var(--text3)", marginBottom: 54, fontWeight: 400, fontFamily: "var(--mono)" }}>
-          No NDAs for the first call · We'll tell you honestly if AI is right for your project
-        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 54 }}>
+          <p style={{ fontSize: 12, color: "var(--text3)", fontWeight: 400, fontFamily: "var(--mono)", margin: 0 }}>
+            Discovery call is free · We'll tell you honestly if AI is right for your project
+          </p>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+            <Lock size={11} color="#22c55e" strokeWidth={2} />
+            <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "#22c55e", letterSpacing: "0.02em" }}>
+              Enterprise-grade data security · No model training on your data
+            </span>
+          </div>
+        </div>
 
         {/* Stat strip */}
         <div
           ref={stripRef}
-          className="rev"
+          className="rev max-nav:!grid-cols-2"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",

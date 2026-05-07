@@ -98,7 +98,7 @@ export default function ServicesSection() {
             borderRadius: 12,
             overflow: "hidden",
           }}
-          className="max-nav:grid-cols-1"
+          className="max-nav:!grid-cols-1"
         >
           {SERVICES.map((s) => (
             <ServiceCard key={s.num} svc={s} />
@@ -112,7 +112,7 @@ export default function ServicesSection() {
           </div>
           <div
             style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10 }}
-            className="max-nav:grid-cols-3"
+            className="max-nav:!grid-cols-2"
           >
             {DELIVERABLES.map(({ icon: Icon, label }) => (
               <div

@@ -8,7 +8,7 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
   },
   {
     topic: "Who works on your project",
-    good:  "Same 2–3 engineers from discovery to launch",
+    good:  "Dedicated team — right-sized for your project, no rotations",
     bad:   "Seniors in the pitch, juniors on the build",
   },
   {

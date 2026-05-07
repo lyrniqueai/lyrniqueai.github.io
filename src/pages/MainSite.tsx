@@ -4,6 +4,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import SocialProofBar from "@/components/sections/SocialProofBar";
 import WhySection from "@/components/sections/WhySection";
 import ServicesSection from "@/components/sections/ServicesSection";
+import SecurityTrustBar from "@/components/sections/SecurityTrustBar";
 import HowWeWorkSection from "@/components/sections/HowWeWorkSection";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -19,6 +20,7 @@ export default function MainSite() {
       <SocialProofBar />
       <WhySection />
       <ServicesSection />
+      <SecurityTrustBar />
       <HowWeWorkSection />
       <CaseStudiesSection />
       <AboutSection />

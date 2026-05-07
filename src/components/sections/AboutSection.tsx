@@ -122,7 +122,7 @@ export default function AboutSection() {
           mb={0}
         />
         <p style={{ fontSize: 16, color: "var(--text2)", maxWidth: 620, lineHeight: 1.75, marginBottom: 48, fontWeight: 400 }}>
-          <strong style={{ color: "var(--text)", fontWeight: 600 }}>Two founders. 24+ combined years. Production AI across healthcare, finance, e-commerce, and logistics.</strong> No subcontractors. No team rotations. No bench headcount billed to you.{" "}
+          <strong style={{ color: "var(--text)", fontWeight: 600 }}>Two founders. A decade-plus of production AI across healthcare, finance, e-commerce, and logistics.</strong> No subcontractors. No team rotations. No bench headcount billed to you.{" "}
           <strong style={{ color: "var(--text)", fontWeight: 600 }}>The engineers on day one are the engineers on launch day.</strong>{" "}
           Based in <strong style={{ color: "var(--text)", fontWeight: 500 }}>Chennai, India</strong> · US · UK · UAE · Global.
         </p>
@@ -131,6 +131,7 @@ export default function AboutSection() {
         <div
           ref={foundersRef}
           className="rev"
+          className="max-nav:!grid-cols-1"
           style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 48 }}
         >
           {FOUNDERS.map((f) => (
@@ -145,7 +146,7 @@ export default function AboutSection() {
           </div>
           <div
             style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}
-            className="max-nav:grid-cols-2"
+            className="max-nav:!grid-cols-2"
           >
             {PRINCIPLES.map((p, i) => {
               const Icon = p.icon;

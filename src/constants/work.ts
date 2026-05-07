@@ -12,11 +12,11 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Automatic alignment correction across drawing versions",
       "5-category classification with confidence scoring",
       "Human validation layer for edge cases",
-      "Audit-ready PDF reports at 100 comparisons/hour",
+      "Audit-ready PDF reports at 50–100 comparisons/hour · varies by complexity",
     ],
     metrics: [
       { n: "80%+",  l: "Automated accuracy — replaces manual review" },
-      { n: "100/hr", l: "Throughput at production scale" },
+      { n: "50–100/hr", l: "Diagrams compared · varies by complexity" },
       { n: "0",     l: "Missed milestones" },
     ],
     delay: "",

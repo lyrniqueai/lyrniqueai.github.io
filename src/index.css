@@ -481,3 +481,18 @@ html.light [data-wing="academy"] .academy-nav-dropdown {
 
 /* ── Light: reduce grain visibility ── */
 html.light body::after { opacity: 0.15; }
+
+/* ── Mobile responsive overrides (< 900px) ── */
+@media (max-width: 899px) {
+  /* Reduce section vertical padding on mobile */
+  section {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+
+  /* Hero: keep enough top space for the fixed nav */
+  section#home {
+    padding-top: 90px !important;
+    min-height: unset !important;
+  }
+}
