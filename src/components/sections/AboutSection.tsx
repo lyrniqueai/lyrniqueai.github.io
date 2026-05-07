@@ -130,8 +130,7 @@ export default function AboutSection() {
         {/* Founder cards */}
         <div
           ref={foundersRef}
-          className="rev"
-          className="max-nav:!grid-cols-1"
+          className="rev max-nav:!grid-cols-1"
           style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 48 }}
         >
           {FOUNDERS.map((f) => (
