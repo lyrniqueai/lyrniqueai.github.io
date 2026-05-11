@@ -6,6 +6,7 @@ import { PHASES } from "@/constants";
 export default function HowWeWorkSection() {
   const [current, setCurrent] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [progressKey, setProgressKey] = useState(0);
   const clickTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   // Auto-advance phases every 5 s — cleanup both interval and pending timeout.
@@ -16,6 +17,7 @@ export default function HowWeWorkSection() {
       setVisible(false);
       fadeTimeout = setTimeout(() => {
         setCurrent((c) => (c + 1) % PHASES.length);
+        setProgressKey((k) => k + 1);
         setVisible(true);
       }, 280);
     }, 5000);
@@ -35,6 +37,7 @@ export default function HowWeWorkSection() {
     clearTimeout(clickTimeoutRef.current);
     clickTimeoutRef.current = setTimeout(() => {
       setCurrent(i);
+      setProgressKey((k) => k + 1);
       setVisible(true);
     }, 200);
   };
@@ -43,23 +46,25 @@ export default function HowWeWorkSection() {
 
   return (
     <section
-      id="how"
-      style={{ background: "var(--bg2)", borderTop: "1px solid var(--b)", padding: "90px 6vw" }}
+      id="process"
+      style={{ background: "var(--bg2)", borderTop: "1px solid var(--b)", padding: "90px 6vw", position: "relative", overflow: "hidden" }}
     >
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      {/* Depth orb */}
+      <div style={{ position: "absolute", width: 500, height: 500, bottom: "-10%", left: "-8%", borderRadius: "50%", background: "radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 65%)", filter: "blur(80px)", pointerEvents: "none" }} />
+      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
 
         {/* Section header */}
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 36 }}>
           <div>
-            <div className="gt3" style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.1em", marginBottom: 8 }}>
-              How we work
+            <div className="gt3 eyebrow-chapter" style={{ marginBottom: 8 }}>
+              Our Process
             </div>
             <h2 className="font-display" style={{ fontSize: "clamp(26px, 3.5vw, 44px)", fontWeight: 700, letterSpacing: "-1.2px", lineHeight: 1.08, color: "var(--text)", margin: 0 }}>
-              AI runs through every handoff.
+              How we approach every project.
             </h2>
           </div>
-          <p style={{ fontSize: 14, color: "var(--text2)", maxWidth: 340, lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
-            We embed AI across every phase — not just the build. See what you receive at each stage and how fast.
+          <p style={{ fontSize: 14, color: "var(--text2)", maxWidth: 360, lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
+            A clear path from scope to launch, with weekly working progress.
           </p>
         </div>
 
@@ -136,6 +141,10 @@ export default function HowWeWorkSection() {
             transition: "opacity 0.28s ease, transform 0.28s ease",
           }}
         >
+          {/* Progress bar */}
+          <div style={{ height: 2, background: "rgba(99,102,241,0.08)", overflow: "hidden" }}>
+            <div key={progressKey} className="tab-progress" />
+          </div>
           {/* Card header */}
           <div
             style={{
@@ -168,7 +177,7 @@ export default function HowWeWorkSection() {
                 }}
               />
               <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text3)", letterSpacing: "0.1em" }}>
-                AI-ENHANCED
+                {phase.eyebrow.toUpperCase()}
               </span>
             </div>
           </div>

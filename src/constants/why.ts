@@ -1,34 +1,23 @@
-import type { ComparisonRow } from "@/types";
+import { Zap, Building2, ShieldCheck } from "lucide-react";
+import type { Principle } from "@/types";
 
-export const COMPARISON_ROWS: ComparisonRow[] = [
+export const ENGINEERING_PRINCIPLES: Principle[] = [
   {
-    topic: "Delivery speed",
-    good:  "2× faster — AI runs through every handoff, not just the code",
-    bad:   "Standard 6–12 month timelines with no AI leverage",
+    icon: Zap,
+    title: "Launch Faster",
+    body: "AI-native workflows compress build cycles without bloated teams or junior handoffs.",
   },
   {
-    topic: "Who works on your project",
-    good:  "Dedicated team — right-sized for your project, no rotations",
-    bad:   "Seniors in the pitch, juniors on the build",
+    icon: Building2,
+    title: "Build Properly",
+    body: "Architecture, testing, security, deployment, and monitoring are built in from day one.",
   },
   {
-    topic: "What 'AI-first' actually means",
-    good:  "AI in scoping, design, build, QA, and deploy",
-    bad:   "A chatbot added in the last sprint",
-  },
-  {
-    topic: "Your IP ownership",
-    good:  "100% yours from day one — code, models, data, logic",
-    bad:   "Ambiguous contracts, retained rights, licence fees",
-  },
-  {
-    topic: "Who you talk to",
-    good:  "The engineer building it — directly, always",
-    bad:   "Account managers who relay messages 24 hours later",
-  },
-  {
-    topic: "Timezone & response time",
-    good:  "4-hr daily overlap · All messages replied within 4 hours",
-    bad:   "\"We'll get back to you\" with no SLA",
+    icon: ShieldCheck,
+    title: "Own Everything",
+    body: "You get the source code, documentation, deployment access, and a product your team can maintain.",
   },
 ];
+
+/** @deprecated kept for backwards compat during transition */
+export const COMPARISON_ROWS = [] as never[];

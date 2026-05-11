@@ -22,19 +22,19 @@ type FormValues = z.infer<typeof schema>;
 const PROCESS_STEPS = [
   {
     title: "A real engineer reads it",
-    body: "Straight to a founding engineer. Every message read before we reply.",
+    body: "Your message goes straight to the technical team.",
   },
   {
     title: "30-min call — zero sales pitch",
-    body: "Leave knowing whether AI fits your project, what it'll take, and a rough cost range.",
+    body: "Leave with scope, fit, and a rough cost range.",
   },
   {
     title: "Fixed-scope proposal",
-    body: "Architecture, stack, timeline, fixed cost. No hourly billing. No ambiguity.",
+    body: "Architecture, stack, timeline, and fixed cost.",
   },
   {
     title: "If we're not the right fit, we'll say so",
-    body: "We'd rather refer you to the right team than take a project we can't nail.",
+    body: "No forced fit. No vague commitment.",
   },
 ];
 
@@ -42,13 +42,14 @@ const inputStyle: React.CSSProperties = {
   fontFamily: "'Inter', sans-serif",
   fontSize: 14,
   color: "var(--text)",
-  background: "var(--bg2)",
-  border: "1px solid var(--b)",
-  borderRadius: 7,
-  padding: "10px 14px",
+  background: "rgba(99,102,241,0.04)",
+  border: "1px solid rgba(99,102,241,0.22)",
+  borderRadius: 8,
+  padding: "12px 16px",
   outline: "none",
   width: "100%",
   fontWeight: 400,
+  transition: "border-color 0.2s, box-shadow 0.2s",
 };
 
 // ── ContactSection ────────────────────────────────────────────────────────────
@@ -86,10 +87,10 @@ export default function ContactSection() {
           Contact
         </div>
         <h2 className="font-display" style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-1.2px", lineHeight: 1.08, color: "var(--text)", marginBottom: 14 }}>
-          Book your free<br />30-min discovery call.
+          Tell us what you're building.
         </h2>
         <p style={{ fontSize: 16, color: "var(--text2)", maxWidth: 500, lineHeight: 1.7, fontWeight: 400, marginBottom: 36 }}>
-          Tell us what you're building. We'll tell you honestly if we're the right fit.
+          Share the idea. We'll respond with a clear technical next step.
         </p>
 
         <div
@@ -118,10 +119,10 @@ export default function ContactSection() {
               </svg>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)", marginBottom: 2 }}>
-                  Prefer to talk before filling a form? We get it.
+                  Prefer to talk first?
                 </div>
                 <div style={{ fontSize: 12, color: "var(--text2)", fontWeight: 400 }}>
-                  30 minutes. No pitch deck. Leave knowing if we're the right fit.
+                  30 minutes. No pitch deck. Just technical clarity.
                 </div>
               </div>
               <a href="#contact" className="btn-ghost" style={{ flexShrink: 0, fontSize: 12 }}>
@@ -152,27 +153,47 @@ export default function ContactSection() {
                   onSubmit={handleSubmit(onSubmit)}
                   style={{ display: "flex", flexDirection: "column", gap: 12 }}
                 >
-                  <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                    <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text2)", letterSpacing: "0.08em" }}>// name</label>
-                    <input {...register("name")} placeholder="Priya Sharma" style={inputStyle} />
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text3)", letterSpacing: "0.1em" }}>
+                      <span className="gt3" style={{ marginRight: 4 }}>❯</span> name
+                    </label>
+                    <input {...register("name")} placeholder="Your full name" style={inputStyle}
+                      onFocus={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.1)"; }}
+                      onBlur={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.18)"; e.target.style.boxShadow = "none"; }}
+                    />
                     {errors.name && <span style={{ fontSize: 11, color: "#f87171" }}>{errors.name.message}</span>}
                   </div>
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                      <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text2)", letterSpacing: "0.08em" }}>// email</label>
-                      <input {...register("email")} type="email" placeholder="priya@company.com" style={inputStyle} />
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text3)", letterSpacing: "0.1em" }}>
+                        <span className="gt3" style={{ marginRight: 4 }}>❯</span> email
+                      </label>
+                      <input {...register("email")} type="email" placeholder="you@company.com" style={inputStyle}
+                        onFocus={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.1)"; }}
+                        onBlur={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.18)"; e.target.style.boxShadow = "none"; }}
+                      />
                       {errors.email && <span style={{ fontSize: 11, color: "#f87171" }}>{errors.email.message}</span>}
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                      <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text2)", letterSpacing: "0.08em" }}>// company</label>
-                      <input {...register("company")} placeholder="Acme Corp" style={inputStyle} />
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text3)", letterSpacing: "0.1em" }}>
+                        <span className="gt3" style={{ marginRight: 4 }}>❯</span> company
+                      </label>
+                      <input {...register("company")} placeholder="Acme Corp" style={inputStyle}
+                        onFocus={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.1)"; }}
+                        onBlur={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.18)"; e.target.style.boxShadow = "none"; }}
+                      />
                     </div>
                   </div>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                    <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text2)", letterSpacing: "0.08em" }}>// what do you need?</label>
-                    <select {...register("service")} style={{ ...inputStyle, appearance: "none" as const }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text3)", letterSpacing: "0.1em" }}>
+                      <span className="gt3" style={{ marginRight: 4 }}>❯</span> what do you need?
+                    </label>
+                    <select {...register("service")} style={{ ...inputStyle, appearance: "none" as const }}
+                      onFocus={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.1)"; }}
+                      onBlur={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.18)"; e.target.style.boxShadow = "none"; }}
+                    >
                       <option value="" disabled>Select a service</option>
                       <option value="custom-software">Custom software development</option>
                       <option value="ai-integration">AI integration</option>
@@ -182,12 +203,16 @@ export default function ContactSection() {
                     {errors.service && <span style={{ fontSize: 11, color: "#f87171" }}>{errors.service.message}</span>}
                   </div>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                    <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text2)", letterSpacing: "0.08em" }}>// describe the problem</label>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    <label style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text3)", letterSpacing: "0.1em" }}>
+                      <span className="gt3" style={{ marginRight: 4 }}>❯</span> describe the problem
+                    </label>
                     <textarea
                       {...register("message")}
                       placeholder="We need to build... / We're struggling with... / We want to automate..."
-                      style={{ ...inputStyle, resize: "vertical", minHeight: 88, lineHeight: 1.6 }}
+                      style={{ ...inputStyle, resize: "vertical", minHeight: 96, lineHeight: 1.65 }}
+                      onFocus={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.1)"; }}
+                      onBlur={(e) => { e.target.style.borderColor = "rgba(99,102,241,0.18)"; e.target.style.boxShadow = "none"; }}
                     />
                     {errors.message && <span style={{ fontSize: 11, color: "#f87171" }}>{errors.message.message}</span>}
                   </div>
@@ -195,48 +220,59 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
+                    className="btn-hero"
                     style={{
                       width: "100%",
-                      padding: 12,
-                      fontFamily: "'Inter', sans-serif",
+                      padding: "13px 0",
                       fontSize: 14,
-                      fontWeight: 600,
-                      color: "#fff",
-                      background: "var(--g2)",
-                      border: "none",
-                      borderRadius: 8,
+                      justifyContent: "center",
                       cursor: isSubmitting ? "wait" : "pointer",
-                      transition: "all 0.25s",
-                      marginTop: 4,
                       opacity: isSubmitting ? 0.7 : 1,
+                      marginTop: 4,
+                      animation: isSubmitting ? "none" : undefined,
                     }}
                   >
-                    {isSubmitting ? "Sending..." : "Send enquiry →"}
+                    {isSubmitting ? "Sending..." : "Send Enquiry →"}
                   </button>
                 </form>
               )}
             </div>
           </div>
 
-          {/* ── Right — process + location ────────────────────────────── */}
+          {/* ── Right — process timeline + location ──────────────────── */}
           <div>
             <p style={{ fontSize: 15, color: "var(--text2)", lineHeight: 1.75, marginBottom: 28, fontWeight: 400 }}>
-              We respond within <strong style={{ color: "var(--text)", fontWeight: 600 }}>one business day</strong> — not with a proposal, but with an honest answer on whether we're the right fit. Here's exactly what happens after you hit send:
+              We respond within <strong style={{ color: "var(--text)", fontWeight: 600 }}>one business day</strong>. Here's what happens next:
             </p>
 
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {/* Connected timeline */}
+            <div style={{ position: "relative", paddingLeft: 36 }}>
+              {/* Vertical connector line */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: 10,
+                  top: 11,
+                  bottom: 11,
+                  width: 1,
+                  background: "linear-gradient(to bottom, rgba(99,102,241,0.5), rgba(168,85,247,0.2))",
+                }}
+              />
+
               {PROCESS_STEPS.map((s, i) => (
-                <li
+                <div
                   key={s.title}
                   style={{
-                    display: "flex",
-                    gap: 14,
-                    padding: "14px 0",
-                    borderBottom: i < PROCESS_STEPS.length - 1 ? "1px solid var(--b)" : "none",
+                    position: "relative",
+                    paddingBottom: i < PROCESS_STEPS.length - 1 ? 24 : 0,
                   }}
                 >
+                  {/* Dot */}
                   <div
                     style={{
+                      position: "absolute",
+                      left: -36,
+                      top: 2,
                       width: 22,
                       height: 22,
                       borderRadius: "50%",
@@ -245,23 +281,20 @@ export default function ContactSection() {
                       justifyContent: "center",
                       fontFamily: "var(--mono)",
                       fontSize: 10,
-                      fontWeight: 500,
-                      flexShrink: 0,
-                      marginTop: 3,
-                      background: "var(--g2)",
+                      fontWeight: 700,
+                      background: "linear-gradient(135deg, #6366f1, #a855f7)",
                       color: "#fff",
-                      minWidth: 22,
+                      boxShadow: "0 0 10px rgba(99,102,241,0.45)",
+                      zIndex: 1,
                     }}
                   >
                     {i + 1}
                   </div>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text)", marginBottom: 2 }}>{s.title}</div>
-                    <div style={{ fontSize: 12, color: "var(--text2)", fontWeight: 400, lineHeight: 1.5 }}>{s.body}</div>
-                  </div>
-                </li>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 3 }}>{s.title}</div>
+                  <div style={{ fontSize: 12, color: "var(--text2)", fontWeight: 400, lineHeight: 1.55 }}>{s.body}</div>
+                </div>
               ))}
-            </ul>
+            </div>
 
             {/* Location card */}
             <div

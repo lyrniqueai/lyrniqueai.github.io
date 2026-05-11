@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 export default function MainFooter() {
   return (
     <footer
+      className="footer-fade"
       style={{
         background: "var(--bg)",
-        borderTop: "1px solid var(--b)",
         padding: "50px 6vw 28px",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Subtle ambient orb */}
+      {/* Ambient orb */}
       <div style={{
         position: "absolute",
         bottom: -60,
@@ -20,9 +20,32 @@ export default function MainFooter() {
         width: 500,
         height: 200,
         borderRadius: "50%",
-        background: "radial-gradient(ellipse, rgba(99,102,241,0.07) 0%, transparent 70%)",
+        background: "radial-gradient(ellipse, rgba(99,102,241,0.08) 0%, transparent 70%)",
         pointerEvents: "none",
       }} />
+
+      {/* Watermark */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          bottom: -20,
+          left: "50%",
+          transform: "translateX(-50%)",
+          fontSize: "clamp(80px, 14vw, 160px)",
+          fontWeight: 800,
+          fontFamily: "'Space Grotesk', system-ui, sans-serif",
+          letterSpacing: "-4px",
+          lineHeight: 1,
+          color: "transparent",
+          WebkitTextStroke: "1px rgba(99,102,241,0.07)",
+          whiteSpace: "nowrap",
+          userSelect: "none",
+          pointerEvents: "none",
+        }}
+      >
+        LYRNIQUE
+      </div>
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
         <div
           style={{
@@ -40,12 +63,32 @@ export default function MainFooter() {
             <div style={{ fontSize: 17, fontWeight: 700, color: "var(--text)", marginBottom: 10 }}>
               Lyrni<span className="gt2">que</span>
             </div>
-            <div style={{ fontSize: 13, color: "var(--text3)", lineHeight: 1.6, marginBottom: 12, fontWeight: 400 }}>
-              AI-native software development — built in Chennai, delivered globally.<br />
-              Same engineers, start to finish. Zero surprises.
+            <div style={{ fontSize: 13, color: "var(--text3)", lineHeight: 1.6, marginBottom: 6, fontWeight: 400 }}>
+              Built Fast. Engineered Properly.
             </div>
-            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text3)" }}>
+            <div style={{ fontSize: 13, color: "var(--text3)", lineHeight: 1.6, marginBottom: 12, fontWeight: 400 }}>
+              AI-native product engineering — built in Chennai, working globally.
+            </div>
+            <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text3)", marginBottom: 12 }}>
               Chennai, Tamil Nadu, India
+            </div>
+            <div style={{ display: "flex", gap: 12 }}>
+              {[
+                { label: "Mithun", href: "https://linkedin.com/in/mithunchandar" },
+                { label: "Ramachandran", href: "https://linkedin.com/in/ramachandrank" },
+              ].map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--text3)", textDecoration: "none", display: "flex", alignItems: "center", gap: 4, transition: "color 0.2s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text2)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text3)")}
+                >
+                  ↗ {l.label}
+                </a>
+              ))}
             </div>
           </div>
 
@@ -55,10 +98,15 @@ export default function MainFooter() {
               Services
             </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              {["Custom software dev", "AI integration", "Product discovery"].map((s) => (
-                <li key={s} style={{ marginBottom: 9 }}>
-                  <a href="#services" style={{ fontSize: 13, color: "var(--text2)", textDecoration: "none", fontWeight: 400 }}>
-                    {s}
+              {[
+                { href: "#what-we-build", label: "Customer-Facing Products" },
+                { href: "#what-we-build", label: "AI-Powered Systems" },
+                { href: "#what-we-build", label: "Internal Platforms" },
+                { href: "#what-we-build", label: "API & Integration" },
+              ].map((s) => (
+                <li key={s.label} style={{ marginBottom: 9 }}>
+                  <a href={s.href} style={{ fontSize: 13, color: "var(--text2)", textDecoration: "none", fontWeight: 400 }}>
+                    {s.label}
                   </a>
                 </li>
               ))}
@@ -72,8 +120,8 @@ export default function MainFooter() {
             </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {[
-                { href: "#how", label: "How we work" },
-                { href: "#work", label: "Our work" },
+                { href: "#process", label: "Our process" },
+                { href: "#projects", label: "Projects" },
                 { href: "#about", label: "About" },
                 { href: "#contact", label: "Contact" },
               ].map((l) => (
@@ -113,7 +161,7 @@ export default function MainFooter() {
         </div>
 
         <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text3)", textAlign: "center" }}>
-          © 2026 Lyrnique · AI-first software development · Chennai, India
+          © 2026 Lyrnique · Built Fast. Engineered Properly. · Chennai, India
         </div>
       </div>
     </footer>

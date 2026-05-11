@@ -1,42 +1,47 @@
 import {
-  Globe, Smartphone, Bot, FileSearch, Eye,
-  TrendingUp, Sparkles, GitMerge, Server, Cloud,
+  Globe, Bot, LayoutDashboard, GitMerge, Smartphone,
 } from "lucide-react";
 import type { Deliverable, Service } from "@/types";
 
 export const DELIVERABLES: Deliverable[] = [
-  { icon: Globe,       label: "Web Applications" },
-  { icon: Smartphone,  label: "Mobile Apps" },
-  { icon: Bot,         label: "AI Agents" },
-  { icon: FileSearch,  label: "Document Intelligence" },
-  { icon: Eye,         label: "Computer Vision" },
-  { icon: TrendingUp,  label: "Predictive Analytics" },
-  { icon: Sparkles,    label: "Generative AI" },
-  { icon: GitMerge,    label: "Data Pipelines" },
-  { icon: Server,      label: "APIs & Backends" },
-  { icon: Cloud,       label: "Cloud Deployment" },
+  { icon: Globe,           label: "Web Applications" },
+  { icon: Smartphone,      label: "Mobile Apps" },
+  { icon: Bot,             label: "AI Agents" },
+  { icon: LayoutDashboard, label: "Internal Tools" },
+  { icon: GitMerge,        label: "APIs & Backends" },
 ];
 
 export const SERVICES: Service[] = [
   {
     num: "// 01",
-    name: "Custom Software Development",
-    line: "Production-ready web apps, mobile apps, APIs, and admin portals — with AI embedded from day one, not added as an afterthought. Shipped in weeks, not quarters.",
-    stack: ["Web Applications", "Mobile Apps", "Admin Portals", "APIs & Backends", "Cloud Deployment", "Real-time Systems"],
+    name: "Customer-Facing Products",
+    line: "Web and mobile products with the core flows, data model, and launch surface in place.",
+    outcome: "Launch a usable first version with room to evolve",
+    stack: ["SaaS Platforms", "Mobile Apps", "Web Applications", "Progressive Experiences"],
     delay: "",
   },
   {
     num: "// 02",
-    name: "AI Integration",
-    line: "We wire LLMs, AI agents, and intelligent automation directly into your existing product. No rip-and-replace. No generic chatbots. Intelligence built for your domain and your data.",
-    stack: ["Document Intelligence", "Process Automation", "AI Assistants", "Image Recognition", "Predictive Analytics", "Intelligent Search"],
+    name: "AI-Powered Systems",
+    line: "Automation, document intelligence, recommendations, and AI interfaces tied to real workflows.",
+    outcome: "Use AI where it removes operational drag",
+    stack: ["Document Intelligence", "Process Automation", "Recommendation Engines", "Conversational AI"],
     delay: "rd1",
   },
   {
     num: "// 03",
-    name: "Product Discovery Sprint",
-    line: "Our 2-week sprint turns your idea into a precise architecture, feature roadmap, and fixed-scope estimate — so you never pay to build the wrong thing or discover problems in production.",
-    stack: ["Problem framing", "Architecture", "Feature roadmap", "Fixed-scope estimate"],
+    name: "Internal Platforms",
+    line: "Workflow tools, dashboards, data products, and operational systems for growing teams.",
+    outcome: "Give teams clearer control over day-to-day work",
+    stack: ["Workflow Automation", "Operations Dashboards", "Data Tools", "Analytics Systems"],
     delay: "rd2",
+  },
+  {
+    num: "// 04",
+    name: "API & Integration",
+    line: "Backend services, integrations, and data pipelines that connect the product stack.",
+    outcome: "Make the system easier to extend and operate",
+    stack: ["Third-Party Integrations", "Microservices", "Backend Systems", "Data Pipelines"],
+    delay: "rd3",
   },
 ];

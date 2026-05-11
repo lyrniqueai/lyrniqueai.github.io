@@ -165,17 +165,54 @@ body::after {
   filter: drop-shadow(0 0 14px rgba(99,102,241,0.5));
 }
 
+/* Metric number glow (case studies) */
+.metric-glow {
+  filter: drop-shadow(0 0 10px rgba(99,102,241,0.45));
+  transition: filter 0.4s ease;
+}
+.metric-glow.on {
+  filter: drop-shadow(0 0 18px rgba(99,102,241,0.7));
+}
+
+/* Footer gradient fade-in from above */
+.footer-fade::before {
+  content: '';
+  display: block;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  margin-top: -60px;
+  pointer-events: none;
+}
+
+/* Gradient section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(99,102,241,0.4) 30%, rgba(168,85,247,0.4) 60%, transparent 100%);
+  border: none;
+  margin: 0;
+}
+
 /* Glass card */
 .glass-card {
   background: rgba(17,21,32,0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(99,102,241,0.12);
-  transition: border-color 0.3s, background 0.3s;
+  transition: border-color 0.3s, background 0.3s, transform 0.25s, box-shadow 0.25s;
 }
 .glass-card:hover {
   background: rgba(24,28,42,0.75);
   border-color: rgba(99,102,241,0.28);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(99,102,241,0.14), 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.artifact-panel {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025)),
+    rgba(8,10,16,0.72);
+  border: 1px solid rgba(99,102,241,0.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
 /* ── GRADIENT BORDER (::before mask technique) ── */
@@ -220,6 +257,72 @@ body::after {
   background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899, #6366f1);
   background-size: 300% 100%;
   animation: bar-flow 3s linear infinite;
+}
+
+/* ── HERO ENTRANCE ── */
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-in {
+  opacity: 0;
+  animation: hero-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── WORD FADE-UP ANIMATION ── */
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);     filter: blur(0); }
+}
+.word-in {
+  display: inline-block;
+  animation: word-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── CHAPTER EYEBROW ── */
+.eyebrow-chapter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.eyebrow-chapter::before,
+.eyebrow-chapter::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.35));
+}
+.eyebrow-chapter::after {
+  background: linear-gradient(90deg, rgba(99,102,241,0.35), transparent);
+}
+
+/* ── MARQUEE ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── TAB PROGRESS BAR ── */
+@keyframes tab-fill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+.tab-progress {
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #a855f7, #06b6d4);
+  border-radius: 1px;
+  animation: tab-fill 5s linear forwards;
 }
 
 /* ── SCROLL REVEAL ── */
@@ -463,6 +566,13 @@ html.light .glass-card:hover {
   border-color: rgba(99, 102, 241, 0.30);
 }
 
+html.light .artifact-panel {
+  background:
+    linear-gradient(180deg, rgba(99,102,241,0.055), rgba(255,255,255,0.8)),
+    rgba(255,255,255,0.86);
+  border-color: rgba(99,102,241,0.16);
+}
+
 html.light .acad-glass {
   background: rgba(235, 245, 255, 0.85) !important;
   border-color: rgba(0, 100, 200, 0.18) !important;
@@ -486,13 +596,26 @@ html.light body::after { opacity: 0.15; }
 @media (max-width: 899px) {
   /* Reduce section vertical padding on mobile */
   section {
-    padding-top: 56px !important;
-    padding-bottom: 56px !important;
+    padding-top: 44px !important;
+    padding-bottom: 44px !important;
   }
 
   /* Hero: keep enough top space for the fixed nav */
   section#home {
     padding-top: 90px !important;
     min-height: unset !important;
+  }
+
+  .hero-value-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ai-cockpit {
+    margin-top: 6px;
+  }
+
+  .hero-grid,
+  .section-grid {
+    opacity: 0.35;
   }
 }

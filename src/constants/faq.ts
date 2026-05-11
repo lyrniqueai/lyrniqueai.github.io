@@ -2,31 +2,31 @@ import type { FAQItem } from "@/types";
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
-    q: "How much does a project cost?",
-    a: "Every project is scoped before it's priced. We start with a 2-week Discovery Sprint — you get a precise architecture and a written fixed-cost proposal before committing to a build. No hourly billing. No surprise invoices. Pricing depends on scope, complexity, and timeline — the discovery call gives us everything we need to quote accurately.",
+    q: "How can you deliver faster than traditional agencies?",
+    a: "We use modern engineering workflows for repetitive tasks while maintaining human oversight for architecture and business logic. This significantly reduces development cycles without compromising quality.",
   },
   {
-    q: "Who will actually work on my project?",
-    a: "The engineers from your discovery call — right-sized for your project's scope. No team rotations. No subcontractors. No headcount added without your knowledge. Bait-and-switch staffing is the most common offshore failure mode — we've eliminated it by design.",
+    q: "Do you build throwaway prototypes or production systems?",
+    a: "Production systems. Every project is built with clean architecture, automated testing, proper security, and scalability considerations. We don't do \"MVP code\" that needs rewriting later.",
   },
   {
-    q: "You're based in India. What about timezone and collaboration?",
-    a: "4-hour daily overlap with US and UK clients. Responses guaranteed within 4 business hours. Async daily standups so you always know status without attending a call.",
+    q: "What if requirements change mid-development?",
+    a: "We expect some evolution. Our process includes weekly check-ins where you can adjust priorities. Major scope changes may extend timeline—we'll be transparent upfront.",
   },
   {
-    q: "What if the scope changes during the project?",
-    a: "Every scope change is discussed before a line of code is written. You agree to it before we do it. No surprise invoices. No 'we assumed that was included' disputes.",
+    q: "Do I own all the code and IP?",
+    a: "Yes. Complete ownership transfers at project completion, including source code, documentation, and deployment credentials.",
   },
   {
-    q: "Do we really own 100% of the code and IP?",
-    a: "Yes. Source code, AI models, data pipelines, documentation — all transferred to you on delivery. No licence rights, no usage rights retained. Plainly worded in the contract.",
+    q: "Can you maintain the product after launch?",
+    a: "Yes. We offer ongoing engineering support as retainer arrangements. Or we can help transition to your internal team—our code is structured for handoff.",
   },
   {
-    q: "How is this different from just hiring freelancers?",
-    a: "Freelancers give you execution. We give you a full delivery system — discovery, architecture, engineering, QA, deployment, handover — with one team accountable throughout.",
+    q: "What makes you different from offshore dev shops?",
+    a: "Senior engineering team, not junior developers. Same people from discovery through launch. Modern workflows that compress timelines. Focus on architecture quality, not just feature delivery.",
   },
   {
-    q: "We're not sure if we need AI in our product. Can you still help?",
-    a: "Yes — and we'll be straight with you. Our discovery sprint includes an AI applicability assessment. If it fits, we'll show you exactly where. If it doesn't, we'll tell you that too.",
+    q: "Do you only work with startups?",
+    a: "No. We work with startups, growing businesses, and established companies building new products or internal systems. The common thread: you need rapid execution without compromising engineering quality.",
   },
 ];

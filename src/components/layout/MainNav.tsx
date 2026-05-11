@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { NAV_LINKS } from "@/constants";
 
+const SECTION_IDS = ["home", "what-we-build", "process", "projects", "about"];
+
 export default function MainNav() {
   const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -13,7 +16,33 @@ export default function MainNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Track which section is in viewport
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        { threshold: 0.3, rootMargin: "-62px 0px 0px 0px" },
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   const closeMobile = () => setMobileOpen(false);
+
+  const isActive = (href: string) => {
+    const id = href.replace("#", "");
+    return activeSection === id;
+  };
 
   return (
     <>
@@ -39,25 +68,53 @@ export default function MainNav() {
         {/* Logo */}
         <a
           href="#home"
-          style={{ fontSize: 19, fontWeight: 700, color: "var(--text)", textDecoration: "none", letterSpacing: "-0.4px" }}
+          style={{ textDecoration: "none", display: "flex", flexDirection: "column", gap: 1 }}
         >
-          Lyrni<span className="gt2">que</span>
+          <span style={{ fontSize: 19, fontWeight: 700, color: "var(--text)", letterSpacing: "-0.4px", lineHeight: 1.1 }}>
+            Lyrni<span className="gt2">que</span>
+          </span>
+          <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--text3)", letterSpacing: "0.06em" }}>
+            Built Fast. Engineered Properly.
+          </span>
         </a>
 
         {/* Desktop nav */}
         <ul className="hidden nav:flex" style={{ gap: 30, listStyle: "none", margin: 0, padding: 0 }}>
-          {NAV_LINKS.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                style={{ fontSize: 13, color: "var(--text2)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--text)")}
-                onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--text2)")}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((l) => {
+            const active = isActive(l.href);
+            return (
+              <li key={l.href} style={{ position: "relative" }}>
+                <a
+                  href={l.href}
+                  style={{
+                    fontSize: 13,
+                    color: active ? "var(--text)" : "var(--text2)",
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                    paddingBottom: 2,
+                  }}
+                  onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--text)")}
+                  onMouseLeave={(e) => ((e.target as HTMLElement).style.color = active ? "var(--text)" : "var(--text2)")}
+                >
+                  {l.label}
+                </a>
+                {active && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      bottom: -4,
+                      left: 0,
+                      right: 0,
+                      height: 2,
+                      borderRadius: 1,
+                      background: "linear-gradient(90deg, #6366f1, #a855f7)",
+                      boxShadow: "0 0 8px rgba(99,102,241,0.6)",
+                    }}
+                  />
+                )}
+              </li>
+            );
+          })}
           <li>
             <Link
               to="/academy"
@@ -119,7 +176,7 @@ export default function MainNav() {
               key={l.href}
               href={l.href}
               onClick={closeMobile}
-              style={{ fontSize: 15, color: "var(--text2)", textDecoration: "none" }}
+              style={{ fontSize: 15, color: isActive(l.href) ? "var(--text)" : "var(--text2)", textDecoration: "none" }}
             >
               {l.label}
             </a>

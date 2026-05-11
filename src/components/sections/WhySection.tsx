@@ -1,13 +1,12 @@
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import SectionHeader from "@/components/common/SectionHeader";
-import { COMPARISON_ROWS } from "@/constants";
+import { ENGINEERING_PRINCIPLES } from "@/constants";
 
 export default function WhySection() {
   const wrapRef = useScrollReveal<HTMLDivElement>();
 
   return (
     <section
-      id="why"
+      id="engineering-principles"
       style={{
         background: "var(--bg2)",
         borderTop: "1px solid var(--b)",
@@ -17,71 +16,66 @@ export default function WhySection() {
       }}
     >
       <div className="section-grid" />
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <SectionHeader
-          eyebrow="Why Lyrnique"
-          title={<>We work differently.<br />Here's exactly how.</>}
-          sub="Every agency says the same thing. Here's the difference: same engineers, day one to launch. No bait-and-switch staffing. No ambiguous IP. No surprises."
-        />
+      <div style={{ position: "absolute", width: 500, height: 500, top: "-5%", left: "-10%", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 65%)", filter: "blur(80px)", pointerEvents: "none" }} />
+      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <div style={{ marginBottom: 44 }}>
+          <div className="gt3 eyebrow-chapter">
+            Why Lyrnique
+          </div>
+          <h2 className="font-display" style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-1.2px", lineHeight: 1.08, color: "var(--text)", marginBottom: 14 }}>
+            Why Teams Choose Lyrnique
+          </h2>
+          <p style={{ fontSize: 16, color: "var(--text2)", maxWidth: 480, lineHeight: 1.7, fontWeight: 400 }}>
+            Faster delivery, senior execution, and a clean handoff your team can trust.
+          </p>
+        </div>
 
         <div
           ref={wrapRef}
-          className="rev"
+          className="rev max-nav:!grid-cols-1"
           style={{
-            background: "var(--bg)",
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 1,
+            background: "var(--b)",
             border: "1px solid var(--b)",
             borderRadius: 12,
             overflow: "hidden",
           }}
         >
-          {/* Card title bar */}
-          <div style={{ padding: "18px 24px", borderBottom: "1px solid var(--b)", display: "flex", alignItems: "center", gap: 10 }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M7 1l1.4 2.8L12 4.3l-2.5 2.4.6 3.4L7 8.5 4 10.1l.6-3.4L2 4.3l3.6-.5L7 1z" stroke="#a855f7" strokeWidth="1" strokeLinejoin="round" />
-            </svg>
-            <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text)" }}>Lyrnique vs a larger agency</span>
-          </div>
-
-          {/* Header row */}
-          <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", background: "var(--bg3)", borderBottom: "1px solid var(--b)" }}
-            className="max-nav:!grid-cols-2"
-          >
-            <div style={{ padding: "11px 22px", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text2)" }}>
-              Capability
-            </div>
-            <div style={{ padding: "11px 22px", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              <span className="gt3">Lyrnique</span>
-            </div>
-            <div className="max-nav:hidden" style={{ padding: "11px 22px", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text2)" }}>
-              Typical agency
-            </div>
-          </div>
-
-          {/* Data rows */}
-          {COMPARISON_ROWS.map((r, i) => (
-            <div
-              key={r.topic}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                borderBottom: i < COMPARISON_ROWS.length - 1 ? "1px solid var(--b)" : "none",
-              }}
-              className="max-nav:!grid-cols-2"
-            >
-              <div style={{ padding: "13px 22px", fontSize: 13, color: "var(--text)", fontWeight: 400, display: "flex", alignItems: "flex-start" }}>
-                {r.topic}
+          {ENGINEERING_PRINCIPLES.map((p, i) => {
+            const Icon = p.icon;
+            const delay = ["", "rd1", "rd2", "rd3"][i] ?? "";
+            return (
+              <div
+                key={p.title}
+                className="glass-card"
+                style={{ padding: "32px 30px", borderRadius: 0, transitionDelay: delay === "rd1" ? "0.1s" : delay === "rd2" ? "0.2s" : delay === "rd3" ? "0.3s" : "0s" }}
+              >
+                <div
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 10,
+                    background: "linear-gradient(135deg, rgba(99,102,241,0.14), rgba(168,85,247,0.10))",
+                    border: "1px solid rgba(99,102,241,0.2)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 18,
+                  }}
+                >
+                  <Icon size={20} color="#8b8ff7" strokeWidth={1.6} />
+                </div>
+                <div style={{ fontSize: 16, fontWeight: 600, color: "var(--text)", marginBottom: 10, letterSpacing: "-0.3px" }}>
+                  {p.title}
+                </div>
+                <div style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.6, fontWeight: 400 }}>
+                  {p.body}
+                </div>
               </div>
-              <div style={{ padding: "13px 22px", fontSize: 13, fontWeight: 400, background: "rgba(99,102,241,0.06)", display: "flex", alignItems: "flex-start", gap: 8 }}>
-                <span style={{ color: "#22c55e", flexShrink: 0, marginTop: 1 }}>✓</span>
-                <span className="gt3" style={{ lineHeight: 1.55 }}>{r.good}</span>
-              </div>
-              <div className="max-nav:hidden" style={{ padding: "13px 22px", fontSize: 13, color: "var(--text2)", fontWeight: 400, display: "flex", alignItems: "flex-start", gap: 8 }}>
-                <span style={{ color: "var(--text3)", flexShrink: 0, marginTop: 1 }}>✗</span>
-                <span style={{ lineHeight: 1.55 }}>{r.bad}</span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

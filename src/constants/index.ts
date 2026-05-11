@@ -6,3 +6,4 @@ export * from "./howWeWork";
 export * from "./work";
 export * from "./about";
 export * from "./faq";
+export * from "./techStack";

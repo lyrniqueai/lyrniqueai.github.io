@@ -1,82 +1,56 @@
-import { INDUSTRIES, GEOS } from "@/constants";
+const SIGNALS = [
+  "AI Product Engineering", "Custom Software Development", "AI Integrations",
+  "Internal Tools", "API Backends", "Senior Engineers", "Full Code Ownership",
+  "Chennai to Global",
+];
+
+const DOT = (
+  <span style={{ display: "inline-block", width: 3, height: 3, borderRadius: "50%", background: "rgba(99,102,241,0.4)", margin: "0 18px", verticalAlign: "middle", flexShrink: 0 }} />
+);
+
+function MarqueeItem({ label }: { label: string }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        fontFamily: "var(--mono)",
+        fontSize: 12,
+        color: "var(--text3)",
+        whiteSpace: "nowrap",
+        letterSpacing: "0.04em",
+        flexShrink: 0,
+      }}
+    >
+      {label}
+      {DOT}
+    </span>
+  );
+}
 
 export default function SocialProofBar() {
+  const items = [...SIGNALS, ...SIGNALS];
+
   return (
     <div
       style={{
         background: "var(--bg2)",
         borderTop: "1px solid var(--b)",
         borderBottom: "1px solid var(--b)",
-        padding: "18px 6vw",
+        padding: "12px 0",
+        overflow: "hidden",
+        position: "relative",
       }}
     >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          gap: 20,
-          flexWrap: "wrap",
-        }}
-      >
-        {/* Label */}
-        <span
-          style={{
-            fontFamily: "var(--mono)",
-            fontSize: 11,
-            color: "var(--text3)",
-            letterSpacing: "0.08em",
-            whiteSpace: "nowrap",
-            flexShrink: 0,
-          }}
-        >
-          Built for teams in
-        </span>
+      {/* Left fade */}
+      <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(to right, var(--bg2), transparent)", zIndex: 1, pointerEvents: "none" }} />
+      {/* Right fade */}
+      <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(to left, var(--bg2), transparent)", zIndex: 1, pointerEvents: "none" }} />
 
-        <div style={{ width: 1, height: 16, background: "var(--b2)", flexShrink: 0 }} />
-
-        {/* Industry badges */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, flex: 1 }}>
-          {INDUSTRIES.map(({ label, icon: Icon }) => (
-            <span
-              key={label}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 5,
-                fontFamily: "var(--mono)",
-                fontSize: 11,
-                color: "var(--text2)",
-                background: "rgba(99,102,241,0.06)",
-                border: "1px solid rgba(99,102,241,0.14)",
-                borderRadius: 4,
-                padding: "3px 10px",
-                whiteSpace: "nowrap",
-              }}
-            >
-              <Icon size={11} color="var(--text2)" strokeWidth={1.6} />
-              {label}
-            </span>
-          ))}
-        </div>
-
-        <div style={{ width: 1, height: 16, background: "var(--b2)", flexShrink: 0 }} className="hidden nav:block" />
-
-        {/* Geo list */}
-        <div className="hidden nav:flex" style={{ gap: 8, alignItems: "center", flexShrink: 0 }}>
-          <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--text3)", letterSpacing: "0.06em" }}>
-            Clients in
-          </span>
-          {GEOS.map((g, i) => (
-            <span key={g} style={{ fontSize: 11, color: "var(--text2)", fontFamily: "var(--mono)" }}>
-              {g}
-              {i < GEOS.length - 1 && (
-                <span style={{ color: "var(--text3)", margin: "0 4px" }}>·</span>
-              )}
-            </span>
-          ))}
-        </div>
+      <div className="marquee-track" style={{ alignItems: "center" }}>
+        {items.map((label, i) => (
+          <MarqueeItem key={`${label}-${i}`} label={label} />
+        ))}
       </div>
     </div>
   );

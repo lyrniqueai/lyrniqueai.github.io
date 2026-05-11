@@ -27,6 +27,7 @@ export interface Service {
   num: string;
   name: string;
   line: string;
+  outcome: string;
   stack: string[];
   delay: string;
 }
@@ -66,6 +67,9 @@ export interface CaseStudy {
   desc: string;
   bullets: string[];
   metrics: Metric[];
+  stack: string[];
+  timeline: string;
+  approach: string[];
   delay: string;
 }
 
@@ -89,4 +93,10 @@ export interface Principle {
 export interface FAQItem {
   q: string;
   a: string;
+}
+
+// ── Tech Stack ────────────────────────────────────────────────────────────────
+export interface TechCategory {
+  name: string;
+  items: string[];
 }
